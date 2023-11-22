@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900 & display: swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background-color: #FFFFFF;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar{
+    padding: 12px 0;
+    background: #2a9d8f;
+}
+
+.navbar .navbar-brand span{
+    margin-left: 10px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.logo-image{
+    height: 50px;
+    width: 50px;
+}
+
+.nav-item{
+    color: #FFFFFF;
+    font-weight: 500;
+    text-decoration: none;
+    list-style: none;
+    margin: auto 10px;
+}
+
+#basic-nav-dropdown{
+    color: #FFFFFF !important; 
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    list-style: none !important;
+}
+
+.nav-dropdown-master span{
+    color: #FFFFFF;
+}
+
+.nav-button .btn-auth{
+    margin: auto 24px 0 0;
+    width: 100%;
+    height: auto;
+    background-color: #264653;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: none;
+}
+
+.nav-item:hover{
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.nav-item i{
+    margin-right: 10px;
+}
+
+
+/* ---------- End Navbar ---------- */
+
+
+/* ---------- Login Content  ---------- */
+
+.simpin-row-login{
+    height: 100vh;
+}
+
+.simpin-col-login{
+    margin: auto 0;
+    position: relative;
+}
+
+.simpin-col-login h2{
+    font-weight: 700;
+}
+
+.simpin-col-login p{
+    font-weight: 500;
+}
+
+.simpin-col-login img{
+    width: 32px;
+    margin: auto 0;
+}
+
+.simpin-col-login .simpin-form-login{
+    margin: 4% 0 0;
+    width: 90%;
+}
+
+.simpin-col-login .form-label{
+    font-weight: 500;
+}
+
+.simpin-col-login .simpin-form-email,
+.simpin-col-login .simpin-form-password{
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+}
+
+.simpin-col-login .simpin-content-link-register .simpin-content-hyperlink{
+    text-decoration: none;
+}
+
+.simpin-col-login .simpin-content-link-register .simpin-content-hyperlink:hover{
+    text-decoration: none;
+}
+
+.simpin-col-login .simpin-content-link-register p{
+    color: #264653;
+    font-weight: 500;
+    padding: 2% 0;
+}
+
+.simpin-col-login .simpin-content-loggedin button{
+    margin: 0;
+    width: 90%;
+    height: 48px;
+    background: #264653;
+    border-radius: 10px;
+    border: 1px solid #264653;
+}
+
+.simpin-col-login .simpin-content-loggedin p{
+    margin: auto 0;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.simpin-login-image img{
+    position: absolute;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    width: 48%;
+}
+
+/* ---------- End Login Content  ---------- */
+
+
+/* ---------- Register Content  ---------- */
+
+.simpin-row-register{
+    height: 112vh;
+}
+
+.simpin-col-register{
+    margin: auto 0;
+    position: relative;
+}
+
+.simpin-col-register h2{
+    font-weight: 700;
+}
+
+.simpin-col-register p{
+    font-weight: 500;
+}
+
+.simpin-col-register img{
+    width: 32px;
+    margin: auto 0;
+}
+
+.simpin-col-register .simpin-form-login{
+    margin: 4% 0 0;
+    width: 90%;
+}
+
+.simpin-col-register .form-label{
+    font-weight: 500;
+}
+
+.simpin-col-register .simpin-form-name,
+.simpin-col-register .simpin-form-phone-number,
+.simpin-col-register .simpin-form-member-number,
+.simpin-col-register .simpin-form-registration-date,
+.simpin-col-register .simpin-form-email,
+.simpin-col-register .simpin-form-password,
+.simpin-col-register .simpin-form-confirm-password{
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+}
+
+.simpin-col-register .simpin-content-loggedin button{
+    margin: 4% 0 0;
+    width: 100%;
+    height: 48px;
+    background: #264653;
+    border-radius: 10px;
+    border: 1px solid #264653;
+}
+
+.simpin-col-register .simpin-content-loggedin p{
+    margin: auto 0;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.simpin-col-register-image img{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 120vh;
+    width: 46%;
+}
+
+/* ---------- End Register Content  ---------- */
