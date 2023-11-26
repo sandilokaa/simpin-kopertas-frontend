@@ -16,7 +16,7 @@ import axios from "axios";
 import { useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 
-const PrincipalSaving = () => {
+const MandatorySaving = () => {
 
     /* -------------------- Global Variable -------------------- */
 
@@ -74,20 +74,20 @@ const PrincipalSaving = () => {
     /* -------------------- End Current User -------------------- */
 
 
-    /* -------------------- Get Principal Saving -------------------- */
+    /* -------------------- Get Mandatory Saving -------------------- */
 
-    const [principalSavingData, setPrincipalSavingData] = useState([]);
+    const [mandatorySavingData, setMandatorySavingData] = useState([]);
 
-    const searchPrincipalSavingField = useRef();
+    const searchMandatorySavingField = useRef();
 
     const onSearch = async () => {
 
         const token = localStorage.getItem("token");
 
-        const getSearchPrincipalSavingField = searchPrincipalSavingField.current.value;
+        const getSearchMandatorySavingField = searchMandatorySavingField.current.value;
 
-        const principalSavingDataRequest = await axios.get(
-            `http://localhost:8080/api/v1/principal-saving?name=${getSearchPrincipalSavingField}`,
+        const mandatorySavingDataRequest = await axios.get(
+            `http://localhost:8080/api/v1/mandatory-saving?name=${getSearchMandatorySavingField}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -97,9 +97,9 @@ const PrincipalSaving = () => {
         );
 
 
-        const getPrincipalSavingResponse = await principalSavingDataRequest.data;
+        const getMandatorySavingResponse = await mandatorySavingDataRequest.data;
 
-        setPrincipalSavingData(getPrincipalSavingResponse.data.handleGetedAllPrincipalSaving);
+        setMandatorySavingData(getMandatorySavingResponse.data.handleGetedAllMandatorySaving);
     };
 
     useEffect(() => {
@@ -109,7 +109,7 @@ const PrincipalSaving = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    /* -------------------- End Get Principal Saving -------------------- */
+    /* -------------------- End Get Mandatory Saving -------------------- */
 
 
     /* -------------------- Handle Selected Date -------------------- */
@@ -127,30 +127,30 @@ const PrincipalSaving = () => {
     /* -------------------- End Handle Selected Date -------------------- */
 
 
-    /* -------------------- Handle Create Principal Saving -------------------- */
+    /* -------------------- Handle Create Mandatory Saving -------------------- */
 
-    const [showFormPrincipalSaving, setShowFormPrincipalSaving] = useState(false);
+    const [showFormMandatorySaving, setShowFormMandatorySaving] = useState(false);
 
-    const handleCloseFormPrincipalSaving = () => setShowFormPrincipalSaving(false);
-    const handleShowFormPrincipalSaving = () => setShowFormPrincipalSaving(true);
+    const handleCloseFormMandatorySaving = () => setShowFormMandatorySaving(false);
+    const handleShowFormMandatorySaving = () => setShowFormMandatorySaving(true);
 
     const nominalField = useRef();
 
-    const onCreateTransactionPrincipalSaving= async () => {
+    const onCreateTransactionMandatorySaving= async () => {
 
         try {
 
             const token = localStorage.getItem("token");
 
-            const principalSavingPayload = {
+            const mandatorySavingPayload = {
                 name: user.name,
                 nominal: nominalField.current.value,
                 depositeDate: selectedDate,
             };
 
-            const principalSavingPayloadRequest = await axios.post(
-                `http://localhost:8080/api/v1/principal-saving`,
-                principalSavingPayload,
+            const mandatorySavingPayloadRequest = await axios.post(
+                `http://localhost:8080/api/v1/mandatory-saving`,
+                mandatorySavingPayload,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -160,15 +160,15 @@ const PrincipalSaving = () => {
             );
             
 
-            const principalSavingPayloadResponse = principalSavingPayloadRequest.data;
+            const mandatorySavingPayloadResponse = mandatorySavingPayloadRequest.data;
 
-            enqueueSnackbar(principalSavingPayloadResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar(mandatorySavingPayloadResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            if (principalSavingPayloadResponse.status) {
+            if (mandatorySavingPayloadResponse.status) {
 
-                handleCloseFormPrincipalSaving();
+                handleCloseFormMandatorySaving();
 
-                window.location.reload("/principal-saving");
+                window.location.reload("/mandatory-saving");
 
             }
 
@@ -180,19 +180,19 @@ const PrincipalSaving = () => {
 
     };
 
-    /* -------------------- End Handle Create Principal Saving -------------------- */
+    /* -------------------- End Handle Create Mandatory Saving -------------------- */
 
 
-    /* -------------------- Handle Delete Principal Saving By Id -------------------- */
+    /* -------------------- Handle Delete Mandatory Saving By Id -------------------- */
 
-    const onDeletePrincipalSavingById = async (id) => {
+    const onDeleteMandatorySavingById = async (id) => {
 
         const token = localStorage.getItem("token");
 
         try {
 
-            const principalSavingRequest = await axios.delete(
-                `http://localhost:8080/api/v1/principal-saving/${id}`,
+            const mandatorySavingRequest = await axios.delete(
+                `http://localhost:8080/api/v1/mandatory-saving/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -200,13 +200,13 @@ const PrincipalSaving = () => {
                 }
             );
 
-            const principalSavingResponse = await principalSavingRequest.data;
+            const mandatorySavingResponse = await mandatorySavingRequest.data;
 
-            enqueueSnackbar(principalSavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar(mandatorySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            if (principalSavingResponse.status) {
+            if (mandatorySavingResponse.status) {
 
-                window.location.reload("/principal-saving")
+                window.location.reload("/mandatory-saving")
 
             }
 
@@ -218,22 +218,22 @@ const PrincipalSaving = () => {
 
     };
 
-    /* -------------------- End Handle Delete Principal Saving By Id -------------------- */
+    /* -------------------- End Handle Delete Mandatory Saving By Id -------------------- */
 
 
-    /* -------------------- Get Principal Saving By Id -------------------- */
+    /* -------------------- Get Mandatory Saving By Id -------------------- */
 
-    const [showFormUpdatePrincipalSaving, setShowFormUpdatePrincipalSaving] = useState(false);
-    const [principalSavingById, setPrincipalSavingById] = useState([]);
+    const [showFormUpdateMandatorySaving, setShowFormUpdateMandatorySaving] = useState(false);
+    const [mandatorySavingById, setMandatorySavingById] = useState([]);
 
-    const handleCloseFormUpdatePrincipalSaving = () => setShowFormUpdatePrincipalSaving(false);
+    const handleCloseFormUpdateMandatorySaving = () => setShowFormUpdateMandatorySaving(false);
 
-    const handleShowFormUpdatePrincipalSaving = async (id) => {
+    const handleShowFormUpdateMandatorySaving = async (id) => {
 
         const token = localStorage.getItem("token");
 
-        const principalSavingRequest = await axios.get(
-            `http://localhost:8080/api/v1/principal-saving/${id}`,
+        const mandatorySavingRequest = await axios.get(
+            `http://localhost:8080/api/v1/mandatory-saving/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -242,11 +242,11 @@ const PrincipalSaving = () => {
             }
         );
 
-        const getPrincipalSavingByIdResponse = await principalSavingRequest.data;
+        const getMandatorySavingByIdResponse = await mandatorySavingRequest.data;
 
-        setPrincipalSavingById(getPrincipalSavingByIdResponse.data.handleGetedPrincipalSavingById);
+        setMandatorySavingById(getMandatorySavingByIdResponse.data.handleGetedMandatorySavingById);
 
-        setShowFormUpdatePrincipalSaving(true);
+        setShowFormUpdateMandatorySaving(true);
 
         localStorage.setItem("id", id);
 
@@ -254,31 +254,29 @@ const PrincipalSaving = () => {
 
     };
 
-    /* -------------------- End Get Product By Id -------------------- */
+    /* -------------------- End Get Mandatory By Id -------------------- */
 
 
-    /* -------------------- Update Product By Id -------------------- */
+    /* -------------------- Update Mandatory By Id -------------------- */
 
     const nominalUpdateField = useRef();
 
-    const onUpdatePrincipalSaving = async (id) => {
+    const onUpdateMandatorySaving = async (id) => {
 
         try {
 
             const token = localStorage.getItem("token");
             const id = localStorage.getItem("id")
 
-            const updatePrincipalSavingPayload = {
+            const updateMandatorySavingPayload = {
                 name: user.name,
                 nominal: nominalUpdateField.current.value,
                 depositeDate: selectedDate,
             };
 
-            console.log(updatePrincipalSavingPayload);
-
-            const updatePrincipalSavingRequest = await axios.put(
-                `http://localhost:8080/api/v1/principal-saving/${id}`,
-                updatePrincipalSavingPayload,
+            const updateMandatorySavingRequest = await axios.put(
+                `http://localhost:8080/api/v1/mandatory-saving/${id}`,
+                updateMandatorySavingPayload,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -287,15 +285,15 @@ const PrincipalSaving = () => {
                 }
             );
 
-            const updatePrincipalSavingResponse = updatePrincipalSavingRequest.data;
+            const updateMandatorySavingResponse = updateMandatorySavingRequest.data;
 
-            enqueueSnackbar(updatePrincipalSavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar(updateMandatorySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            if (updatePrincipalSavingResponse.status) {
+            if (updateMandatorySavingResponse.status) {
 
                 localStorage.removeItem("id")
 
-                window.location.reload("/principal-saving")
+                window.location.reload("/mandatory-saving")
 
             }
 
@@ -317,7 +315,7 @@ const PrincipalSaving = () => {
 
                 <Row>
                     <Col className="col-12 col-lg-6 d-flex justify-content-start">
-                        <Button className="btn btn-add-principal-saving" onClick={handleShowFormPrincipalSaving}> Add Transaction </Button>
+                        <Button className="btn btn-add-mandatory-saving" onClick={handleShowFormMandatorySaving}> Add Transaction </Button>
                     </Col>
                     <Col className="col-12 col-lg-6 d-flex justify-content-end">
                         <InputGroup className="mb-3 simpin-search-group">
@@ -326,7 +324,7 @@ const PrincipalSaving = () => {
                                 placeholder="Cari transaksi disini..."
                                 aria-label="Cari transaksi disini..."
                                 aria-describedby="basic-addon2"
-                                ref={searchPrincipalSavingField}
+                                ref={searchMandatorySavingField}
                             />
                             <Button id="button-addon2" className="btn-search" onClick={onSearch}>
                                 Search
@@ -335,7 +333,7 @@ const PrincipalSaving = () => {
                     </Col>
                 </Row>
 
-            <Table striped bordered hover className="simpin-principal-saving-table">
+            <Table striped bordered hover className="simpin-mandatory-saving-table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -346,26 +344,26 @@ const PrincipalSaving = () => {
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                {principalSavingData.map((principalSaving, index) =>
-                    <tbody key={principalSaving.id}>
+                {mandatorySavingData.map((mandatorySaving, index) =>
+                    <tbody key={mandatorySaving.id}>
                         <tr>
                             <td>{index + 1}</td>
-                            <td>{principalSaving.name}</td>
-                            <td>{principalSaving.User.memberNumber}</td>
-                            <td>{principalSaving.depositeDate}</td>
-                            <td>{CurrencyFormatter(principalSaving.nominal)}</td>
+                            <td>{mandatorySaving.name}</td>
+                            <td>{mandatorySaving.User.memberNumber}</td>
+                            <td>{mandatorySaving.depositeDate}</td>
+                            <td>{CurrencyFormatter(mandatorySaving.nominal)}</td>
                             <td>
-                                <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdatePrincipalSaving(principalSaving.id)}></i>
-                                <i className="bi bi-trash" onClick={() => onDeletePrincipalSavingById(principalSaving.id)}></i>
+                                <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdateMandatorySaving(mandatorySaving.id)}></i>
+                                <i className="bi bi-trash" onClick={() => onDeleteMandatorySavingById(mandatorySaving.id)}></i>
                             </td>
                         </tr>
                     </tbody>
                 )}
             </Table>
 
-            {/* ----------------- Modal Form Create Principal Saving ----------------- */}
+            {/* ----------------- Modal Form Create Mandatory Saving ----------------- */}
 
-            <Modal show={showFormPrincipalSaving} onHide={handleCloseFormPrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={showFormMandatorySaving} onHide={handleCloseFormMandatorySaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Form Product</Modal.Title>
                     </Modal.Header>
@@ -386,21 +384,21 @@ const PrincipalSaving = () => {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseFormPrincipalSaving}>
+                        <Button variant="secondary" onClick={handleCloseFormMandatorySaving}>
                             Close
                         </Button>
-                        <Button variant="success" onClick={onCreateTransactionPrincipalSaving}>
+                        <Button variant="success" onClick={onCreateTransactionMandatorySaving}>
                             Submit
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
-                {/* ----------------- End Modal Form Create Principal Saving ----------------- */}
+                {/* ----------------- End Modal Form Create Mandatory Saving ----------------- */}
 
 
-                {/* ----------------- Modal Form Update Principal Saving ----------------- */}
+                {/* ----------------- Modal Form Update Mandatory Saving ----------------- */}
 
-            <Modal show={showFormUpdatePrincipalSaving} onHide={handleCloseFormUpdatePrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={showFormUpdateMandatorySaving} onHide={handleCloseFormUpdateMandatorySaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Form Product</Modal.Title>
                     </Modal.Header>
@@ -408,29 +406,29 @@ const PrincipalSaving = () => {
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" defaultValue={principalSavingById ? principalSavingById.name : null} autoComplete="off"/>
+                                <Form.Control type="text" defaultValue={mandatorySavingById ? mandatorySavingById.name : null} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Deposite Date</Form.Label>
-                                <Form.Control type="date" onChange={handleDateChange} defaultValue={principalSavingById ? principalSavingById.depositeDate : null} autoComplete="off"/>
+                                <Form.Control type="date" onChange={handleDateChange} defaultValue={mandatorySavingById ? mandatorySavingById.depositeDate : null} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Nominal</Form.Label>
-                                <Form.Control type="number" defaultValue={principalSavingById ? principalSavingById.nominal : null} ref={nominalUpdateField} autoComplete="off"/>
+                                <Form.Control type="number" defaultValue={mandatorySavingById ? mandatorySavingById.nominal : null} ref={nominalUpdateField} autoComplete="off"/>
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseFormUpdatePrincipalSaving}>
+                        <Button variant="secondary" onClick={handleCloseFormUpdateMandatorySaving}>
                             Close
                         </Button>
-                        <Button variant="success" onClick={onUpdatePrincipalSaving}>
+                        <Button variant="success" onClick={onUpdateMandatorySaving}>
                             Submit
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
-                {/* ----------------- End Modal Form Update Principal Saving ----------------- */}
+                {/* ----------------- End Modal Form Update Mandatory Saving ----------------- */}
 
 
             </Container>
@@ -440,4 +438,4 @@ const PrincipalSaving = () => {
 
 };
 
-export default PrincipalSaving;
+export default MandatorySaving;

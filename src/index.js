@@ -8,6 +8,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProfileUser from "./pages/profile/Profile";
 import PrincipalSaving from "./pages/principalSaving/PrincipalSaving";
+import MandatorySaving from "./pages/mandatorySaving/MandatorySaving";
 import { SnackbarProvider } from 'notistack';
 
 const roots = document.getElementById('root');
@@ -22,6 +23,7 @@ root.render(
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/profile-user" element={<ProfileUser />}></Route>
                 <Route path="/principal-saving" element={<PrincipalSaving />}></Route>
+                <Route path="/mandatory-saving" element={<MandatorySaving />}></Route>
             </Routes>
         </SnackbarProvider>
     </Router>

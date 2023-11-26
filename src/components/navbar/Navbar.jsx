@@ -107,7 +107,7 @@ const NavbarGeneral = () => {
                             <NavDropdown.Item className="dropdown-item" href="/principal-saving">
                                 Simpanan Pokok
                             </NavDropdown.Item>
-                            <NavDropdown.Item className="dropdown-item">
+                            <NavDropdown.Item className="dropdown-item" href="/mandatory-saving">
                                 Simpanan Wajib
                             </NavDropdown.Item>
                             <NavDropdown.Item className="dropdown-item">
