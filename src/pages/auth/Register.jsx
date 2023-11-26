@@ -15,8 +15,15 @@ import { useSnackbar } from 'notistack';
 
 const Register = () => {
 
+    /* -------------------- Global Variable -------------------- */
+
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
+
+    /* -------------------- End Global Variable -------------------- */
+
+
+    /* -------------------- Handle Selected Date -------------------- */
 
     const [selectedDate, setSelectedDate] = useState('');
 
@@ -27,6 +34,11 @@ const Register = () => {
         setSelectedDate(selectedDateValue);
 
     };
+
+    /* -------------------- End Handle Selected Date -------------------- */
+
+
+    /* -------------------- Register Function -------------------- */
 
     const nameField = useRef();
     const phoneNumberField = useRef();
@@ -71,6 +83,8 @@ const Register = () => {
         }
 
     };
+
+    /* -------------------- End Register Function -------------------- */
 
     return (
 

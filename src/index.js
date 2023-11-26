@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import ProfileUser from "./pages/profile/Profile";
+import PrincipalSaving from "./pages/principalSaving/PrincipalSaving";
 import { SnackbarProvider } from 'notistack';
 
 const roots = document.getElementById('root');
@@ -18,6 +20,8 @@ root.render(
                 <Route path="/login" element={<Login />}></Route> 
                 <Route path="/register" element={<Register />}></Route> 
                 <Route path="/" element={<Home />}></Route>
+                <Route path="/profile-user" element={<ProfileUser />}></Route>
+                <Route path="/principal-saving" element={<PrincipalSaving />}></Route>
             </Routes>
         </SnackbarProvider>
     </Router>
