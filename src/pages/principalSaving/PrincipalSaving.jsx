@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
     Container,
     Table,
-    InputGroup,
     Button,
     Form,
     Row,
@@ -78,16 +77,14 @@ const PrincipalSaving = () => {
 
     const [principalSavingData, setPrincipalSavingData] = useState([]);
 
-    const searchPrincipalSavingField = useRef();
-
     const onSearch = async () => {
 
         const token = localStorage.getItem("token");
 
-        const getSearchPrincipalSavingField = searchPrincipalSavingField.current.value;
+        const userId = localStorage.getItem("userId");
 
         const principalSavingDataRequest = await axios.get(
-            `http://localhost:8080/api/v1/principal-saving?name=${getSearchPrincipalSavingField}`,
+            `http://localhost:8080/api/v1/${userId}/principal-saving`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -99,7 +96,7 @@ const PrincipalSaving = () => {
 
         const getPrincipalSavingResponse = await principalSavingDataRequest.data;
 
-        setPrincipalSavingData(getPrincipalSavingResponse.data.handleGetedAllPrincipalSaving);
+        setPrincipalSavingData(getPrincipalSavingResponse.data.handleGetedPrincipalSavingByUserId);
     };
 
     useEffect(() => {
@@ -136,7 +133,7 @@ const PrincipalSaving = () => {
 
     const nominalField = useRef();
 
-    const onCreateTransactionPrincipalSaving= async () => {
+    const onCreateTransactionPrincipalSaving = async () => {
 
         try {
 
@@ -158,7 +155,7 @@ const PrincipalSaving = () => {
                     },
                 }
             );
-            
+
 
             const principalSavingPayloadResponse = principalSavingPayloadRequest.data;
 
@@ -254,10 +251,10 @@ const PrincipalSaving = () => {
 
     };
 
-    /* -------------------- End Get Product By Id -------------------- */
+    /* -------------------- End Get Principal Saving By Id -------------------- */
 
 
-    /* -------------------- Update Product By Id -------------------- */
+    /* -------------------- Update Principal Saving By Id -------------------- */
 
     const nominalUpdateField = useRef();
 
@@ -307,7 +304,7 @@ const PrincipalSaving = () => {
 
     };
 
-    /* -------------------- End Update Product By Id -------------------- */
+    /* -------------------- End Update Principal Saving By Id -------------------- */
 
 
     return isLoggedIn ? (
@@ -319,69 +316,55 @@ const PrincipalSaving = () => {
                     <Col className="col-12 col-lg-6 d-flex justify-content-start">
                         <Button className="btn btn-add-principal-saving" onClick={handleShowFormPrincipalSaving}> Add Transaction </Button>
                     </Col>
-                    <Col className="col-12 col-lg-6 d-flex justify-content-end">
-                        <InputGroup className="mb-3 simpin-search-group">
-                            <Form.Control
-                                className="simpin-search-control"
-                                placeholder="Cari transaksi disini..."
-                                aria-label="Cari transaksi disini..."
-                                aria-describedby="basic-addon2"
-                                ref={searchPrincipalSavingField}
-                            />
-                            <Button id="button-addon2" className="btn-search" onClick={onSearch}>
-                                Search
-                            </Button>
-                        </InputGroup>
-                    </Col>
                 </Row>
 
-            <Table striped bordered hover className="simpin-principal-saving-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Nomor Anggota</th>
-                        <th>Tanggal Penyimpanan</th>
-                        <th>Nominal</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                {principalSavingData.map((principalSaving, index) =>
-                    <tbody key={principalSaving.id}>
+                <Table striped bordered hover className="simpin-principal-saving-table">
+                    <thead>
                         <tr>
-                            <td>{index + 1}</td>
-                            <td>{principalSaving.name}</td>
-                            <td>{principalSaving.User.memberNumber}</td>
-                            <td>{principalSaving.depositeDate}</td>
-                            <td>{CurrencyFormatter(principalSaving.nominal)}</td>
-                            <td>
-                                <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdatePrincipalSaving(principalSaving.id)}></i>
-                                <i className="bi bi-trash" onClick={() => onDeletePrincipalSavingById(principalSaving.id)}></i>
-                            </td>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Nomor Anggota</th>
+                            <th>Tanggal Penyimpanan</th>
+                            <th>Nominal</th>
+                            <th>Aksi</th>
                         </tr>
-                    </tbody>
-                )}
-            </Table>
+                    </thead>
+                    {principalSavingData.map((principalSaving, index) =>
+                        <tbody key={principalSaving.id}>
+                            <tr>
+                                <td>{index + 1}</td>
+                                <td>{principalSaving.name}</td>
+                                <td>{principalSaving.User.memberNumber}</td>
+                                <td>{principalSaving.depositeDate}</td>
+                                <td>{CurrencyFormatter(principalSaving.nominal)}</td>
+                                <td>
+                                    <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdatePrincipalSaving(principalSaving.id)}></i>
+                                    <i className="bi bi-trash" onClick={() => onDeletePrincipalSavingById(principalSaving.id)}></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    )}
+                </Table>
 
-            {/* ----------------- Modal Form Create Principal Saving ----------------- */}
+                {/* ----------------- Modal Form Create Principal Saving ----------------- */}
 
-            <Modal show={showFormPrincipalSaving} onHide={handleCloseFormPrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
+                <Modal show={showFormPrincipalSaving} onHide={handleCloseFormPrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Form Product</Modal.Title>
+                        <Modal.Title>Form Principal Saving</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" readOnly value={user.name} autoComplete="off"/>
+                                <Form.Control type="text" readOnly value={user.name} autoComplete="off" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Deposite Date</Form.Label>
-                                <Form.Control type="date" onChange={handleDateChange} autoComplete="off"/>
+                                <Form.Control type="date" onChange={handleDateChange} autoComplete="off" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Nominal</Form.Label>
-                                <Form.Control type="number" placeholder="Example: 3000000" ref={nominalField} autoComplete="off"/>
+                                <Form.Control type="number" placeholder="Example: 3000000" ref={nominalField} autoComplete="off" />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
@@ -400,23 +383,23 @@ const PrincipalSaving = () => {
 
                 {/* ----------------- Modal Form Update Principal Saving ----------------- */}
 
-            <Modal show={showFormUpdatePrincipalSaving} onHide={handleCloseFormUpdatePrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
+                <Modal show={showFormUpdatePrincipalSaving} onHide={handleCloseFormUpdatePrincipalSaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Form Product</Modal.Title>
+                        <Modal.Title>Form Principal Saving</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" defaultValue={principalSavingById ? principalSavingById.name : null} autoComplete="off"/>
+                                <Form.Control type="text" defaultValue={principalSavingById ? principalSavingById.name : null} autoComplete="off" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Deposite Date</Form.Label>
-                                <Form.Control type="date" onChange={handleDateChange} defaultValue={principalSavingById ? principalSavingById.depositeDate : null} autoComplete="off"/>
+                                <Form.Control type="date" onChange={handleDateChange} defaultValue={principalSavingById ? principalSavingById.depositeDate : null} autoComplete="off" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Nominal</Form.Label>
-                                <Form.Control type="number" defaultValue={principalSavingById ? principalSavingById.nominal : null} ref={nominalUpdateField} autoComplete="off"/>
+                                <Form.Control type="number" defaultValue={principalSavingById ? principalSavingById.nominal : null} ref={nominalUpdateField} autoComplete="off" />
                             </Form.Group>
                         </Form>
                     </Modal.Body>

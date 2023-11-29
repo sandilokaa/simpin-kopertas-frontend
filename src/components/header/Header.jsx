@@ -78,15 +78,15 @@ const HeaderGeneral = () => {
                     <div className="header-simpin-greetings">
                         <Row>
                             <Col className="col-12 col-lg-12">
-                                <h1> Welcome Back, <span>{user.name}</span> </h1>
-                                <p> Here’s what’s happening with your coorporative today. </p>
+                                <h1> Selamat Datang, <span>{user.name}</span> </h1>
+                                <p> Apa saja yang terjadi dengan koperasi anda hari ini. </p>
                             </Col>
                         </Row>
                     </div>
                     <div className="header-choose-analytics">
                         <Row>
                             <Col className="col-4 col-lg-2">
-                                <Button className={splitLocation[1] === "" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/`)}> Overview </Button>
+                                <Button className={splitLocation[1] === "" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/`)}> Ringkasan </Button>
                             </Col>
                             <Col className="col-4 col-lg-2">
                                 <Button className={splitLocation[1] === "principal-saving" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/principal-saving`)}> Simpan Pokok </Button>
@@ -101,7 +101,7 @@ const HeaderGeneral = () => {
                                 <Button className={splitLocation[1] === "loan-data" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/loan-data`)}> Pinjaman </Button>
                             </Col>
                             <Col className="col-4 col-lg-2">
-                                <Button className={splitLocation[1] === "report-data" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/report-data`)}> Report </Button>
+                                <Button className={splitLocation[1] === "report-data" ? "active" : "btn-choose-analytics"} onClick={() => navigate(`/report-data`)}> Cetak Laporan </Button>
                             </Col>
                         </Row>
                     </div>

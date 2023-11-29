@@ -16,7 +16,7 @@ import axios from "axios";
 import { useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 
-const MandatorySaving = () => {
+const VoluntarySaving = () => {
 
     /* -------------------- Global Variable -------------------- */
 
@@ -107,9 +107,11 @@ const MandatorySaving = () => {
     /* -------------------- End Current User -------------------- */
 
 
-    /* -------------------- Get Mandatory Saving -------------------- */
+    /* -------------------- Get Voluntary Saving -------------------- */
 
-    const [mandatorySavingData, setMandatorySavingData] = useState([]);
+    const [voluntarySavingData, setVoluntarySavingData] = useState([]);
+
+    const searchVoluntarySavingField = useRef();
 
     const onSearch = async () => {
 
@@ -117,8 +119,8 @@ const MandatorySaving = () => {
 
         const userId = localStorage.getItem("userId");
 
-        const mandatorySavingDataRequest = await axios.get(
-            `http://localhost:8080/api/v1/${userId}/mandatory-saving?depositeDate=${selectedYear}-${selectedMonth}`,
+        const voluntarySavingDataRequest = await axios.get(
+            `http://localhost:8080/api/v1/${userId}/voluntary-saving?depositeDate=${selectedYear}-${selectedMonth}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -128,9 +130,9 @@ const MandatorySaving = () => {
         );
 
 
-        const getMandatorySavingResponse = await mandatorySavingDataRequest.data;
+        const getVoluntarySavingResponse = await voluntarySavingDataRequest.data;
 
-        setMandatorySavingData(getMandatorySavingResponse.data.handleGetedMandatorySavingByUserId);
+        setVoluntarySavingData(getVoluntarySavingResponse.data.handleGetedVoluntarySavingByUserId);
     };
 
     useEffect(() => {
@@ -140,39 +142,40 @@ const MandatorySaving = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+
     const onDisplayedFullData = async() => {
 
         window.location.reload('/mandatory-saving')
         
     };
 
-    /* -------------------- End Get Mandatory Saving -------------------- */
+    /* -------------------- End Get Voluntary Saving -------------------- */
 
 
-    /* -------------------- Handle Create Mandatory Saving -------------------- */
+    /* -------------------- Handle Create Voluntary Saving -------------------- */
 
-    const [showFormMandatorySaving, setShowFormMandatorySaving] = useState(false);
+    const [showFormVoluntarySaving, setShowFormVoluntarySaving] = useState(false);
 
-    const handleCloseFormMandatorySaving = () => setShowFormMandatorySaving(false);
-    const handleShowFormMandatorySaving = () => setShowFormMandatorySaving(true);
+    const handleCloseFormVoluntarySaving = () => setShowFormVoluntarySaving(false);
+    const handleShowFormVoluntarySaving = () => setShowFormVoluntarySaving(true);
 
     const nominalField = useRef();
 
-    const onCreateTransactionMandatorySaving = async () => {
+    const onCreateTransactionVoluntarySaving= async () => {
 
         try {
 
             const token = localStorage.getItem("token");
 
-            const mandatorySavingPayload = {
+            const voluntarySavingPayload = {
                 name: user.name,
                 nominal: nominalField.current.value,
                 depositeDate: selectedDate,
             };
 
-            const mandatorySavingPayloadRequest = await axios.post(
-                `http://localhost:8080/api/v1/mandatory-saving`,
-                mandatorySavingPayload,
+            const voluntarySavingPayloadRequest = await axios.post(
+                `http://localhost:8080/api/v1/voluntary-saving`,
+                voluntarySavingPayload,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -180,17 +183,17 @@ const MandatorySaving = () => {
                     },
                 }
             );
+            
 
+            const voluntarySavingPayloadResponse = voluntarySavingPayloadRequest.data;
 
-            const mandatorySavingPayloadResponse = mandatorySavingPayloadRequest.data;
+            enqueueSnackbar(voluntarySavingPayloadResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            enqueueSnackbar(mandatorySavingPayloadResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            if (voluntarySavingPayloadResponse.status) {
 
-            if (mandatorySavingPayloadResponse.status) {
+                handleCloseFormVoluntarySaving();
 
-                handleCloseFormMandatorySaving();
-
-                window.location.reload("/mandatory-saving");
+                window.location.reload("/voluntary-saving");
 
             }
 
@@ -202,19 +205,19 @@ const MandatorySaving = () => {
 
     };
 
-    /* -------------------- End Handle Create Mandatory Saving -------------------- */
+    /* -------------------- End Handle Create Voluntary Saving -------------------- */
 
 
-    /* -------------------- Handle Delete Mandatory Saving By Id -------------------- */
+    /* -------------------- Handle Delete Voluntary Saving By Id -------------------- */
 
-    const onDeleteMandatorySavingById = async (id) => {
+    const onDeleteVoluntarySavingById = async (id) => {
 
         const token = localStorage.getItem("token");
 
         try {
 
-            const mandatorySavingRequest = await axios.delete(
-                `http://localhost:8080/api/v1/mandatory-saving/${id}`,
+            const voluntarySavingRequest = await axios.delete(
+                `http://localhost:8080/api/v1/voluntary-saving/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -222,13 +225,13 @@ const MandatorySaving = () => {
                 }
             );
 
-            const mandatorySavingResponse = await mandatorySavingRequest.data;
+            const voluntarySavingResponse = await voluntarySavingRequest.data;
 
-            enqueueSnackbar(mandatorySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar(voluntarySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            if (mandatorySavingResponse.status) {
+            if (voluntarySavingResponse.status) {
 
-                window.location.reload("/mandatory-saving")
+                window.location.reload("/voluntary-saving")
 
             }
 
@@ -240,22 +243,22 @@ const MandatorySaving = () => {
 
     };
 
-    /* -------------------- End Handle Delete Mandatory Saving By Id -------------------- */
+    /* -------------------- End Handle Delete Voluntary Saving By Id -------------------- */
 
 
-    /* -------------------- Get Mandatory Saving By Id -------------------- */
+    /* -------------------- Get Voluntary Saving By Id -------------------- */
 
-    const [showFormUpdateMandatorySaving, setShowFormUpdateMandatorySaving] = useState(false);
-    const [mandatorySavingById, setMandatorySavingById] = useState([]);
+    const [showFormUpdateVoluntarySaving, setShowFormUpdateVoluntarySaving] = useState(false);
+    const [voluntarySavingById, setVoluntarySavingById] = useState([]);
 
-    const handleCloseFormUpdateMandatorySaving = () => setShowFormUpdateMandatorySaving(false);
+    const handleCloseFormUpdateVoluntarySaving = () => setShowFormUpdateVoluntarySaving(false);
 
-    const handleShowFormUpdateMandatorySaving = async (id) => {
+    const handleShowFormUpdateVoluntarySaving = async (id) => {
 
         const token = localStorage.getItem("token");
 
-        const mandatorySavingRequest = await axios.get(
-            `http://localhost:8080/api/v1/mandatory-saving/${id}`,
+        const voluntarySavingRequest = await axios.get(
+            `http://localhost:8080/api/v1/voluntary-saving/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -264,11 +267,11 @@ const MandatorySaving = () => {
             }
         );
 
-        const getMandatorySavingByIdResponse = await mandatorySavingRequest.data;
+        const getVoluntarySavingByIdResponse = await voluntarySavingRequest.data;
 
-        setMandatorySavingById(getMandatorySavingByIdResponse.data.handleGetedMandatorySavingById);
+        setVoluntarySavingById(getVoluntarySavingByIdResponse.data.handleGetedVoluntarySavingById);
 
-        setShowFormUpdateMandatorySaving(true);
+        setShowFormUpdateVoluntarySaving(true);
 
         localStorage.setItem("id", id);
 
@@ -276,29 +279,31 @@ const MandatorySaving = () => {
 
     };
 
-    /* -------------------- End Get Mandatory By Id -------------------- */
+    /* -------------------- End Get Voluntary Saving By Id -------------------- */
 
 
-    /* -------------------- Update Mandatory By Id -------------------- */
+    /* -------------------- Update Voluntary Saving By Id -------------------- */
 
     const nominalUpdateField = useRef();
 
-    const onUpdateMandatorySaving = async (id) => {
+    const onUpdateVoluntarySaving = async (id) => {
 
         try {
 
             const token = localStorage.getItem("token");
             const id = localStorage.getItem("id")
 
-            const updateMandatorySavingPayload = {
+            const updateVoluntarySavingPayload = {
                 name: user.name,
                 nominal: nominalUpdateField.current.value,
                 depositeDate: selectedDate,
             };
 
-            const updateMandatorySavingRequest = await axios.put(
-                `http://localhost:8080/api/v1/mandatory-saving/${id}`,
-                updateMandatorySavingPayload,
+            console.log(updateVoluntarySavingPayload);
+
+            const updateVoluntarySavingRequest = await axios.put(
+                `http://localhost:8080/api/v1/voluntary-saving/${id}`,
+                updateVoluntarySavingPayload,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -307,15 +312,15 @@ const MandatorySaving = () => {
                 }
             );
 
-            const updateMandatorySavingResponse = updateMandatorySavingRequest.data;
+            const updateVoluntarySavingResponse = updateVoluntarySavingRequest.data;
 
-            enqueueSnackbar(updateMandatorySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar(updateVoluntarySavingResponse.message, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
-            if (updateMandatorySavingResponse.status) {
+            if (updateVoluntarySavingResponse.status) {
 
                 localStorage.removeItem("id")
 
-                window.location.reload("/mandatory-saving")
+                window.location.reload("/voluntary-saving")
 
             }
 
@@ -327,7 +332,7 @@ const MandatorySaving = () => {
 
     };
 
-    /* -------------------- End Update Mandatory Saving By Id -------------------- */
+    /* -------------------- End Update Voluntary Saving By Id -------------------- */
 
 
     return isLoggedIn ? (
@@ -337,11 +342,11 @@ const MandatorySaving = () => {
 
                 <Row>
                     <Col className="col-12 col-lg-6 d-flex justify-content-start">
-                        <Button className="btn btn-add-mandatory-saving" onClick={handleShowFormMandatorySaving}> Add Transaction </Button>
+                        <Button className="btn btn-add-voluntary-saving" onClick={handleShowFormVoluntarySaving}> Add Transaction </Button>
                     </Col>
                     <Col className="col-12 col-lg-6 d-flex justify-content-end">
                         <InputGroup className="mb-3 simpin-search-group">
-                            <Form.Select aria-label="Default select example" value={selectedYear} onChange={handleYearChange}>
+                        <Form.Select aria-label="Default select example" value={selectedYear} onChange={handleYearChange}>
                                 <option>Tahun</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
@@ -380,102 +385,102 @@ const MandatorySaving = () => {
                     </Col>
                 </Row>
 
-                <Table striped bordered hover className="simpin-mandatory-saving-table">
-                    <thead>
+            <Table striped bordered hover className="simpin-voluntary-saving-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Nomor Anggota</th>
+                        <th>Tanggal Penyimpanan</th>
+                        <th>Nominal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                {voluntarySavingData.map((voluntarySaving, index) =>
+                    <tbody key={voluntarySaving.id}>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Nomor Anggota</th>
-                            <th>Tanggal Penyimpanan</th>
-                            <th>Nominal</th>
-                            <th>Aksi</th>
+                            <td>{index + 1}</td>
+                            <td>{voluntarySaving.name}</td>
+                            <td>{voluntarySaving.User.memberNumber}</td>
+                            <td>{voluntarySaving.depositeDate}</td>
+                            <td>{CurrencyFormatter(voluntarySaving.nominal)}</td>
+                            <td>
+                                <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdateVoluntarySaving(voluntarySaving.id)}></i>
+                                <i className="bi bi-trash" onClick={() => onDeleteVoluntarySavingById(voluntarySaving.id)}></i>
+                            </td>
                         </tr>
-                    </thead>
-                    {mandatorySavingData.map((mandatorySaving, index) =>
-                        <tbody key={mandatorySaving.id}>
-                            <tr>
-                                <td>{index + 1}</td>
-                                <td>{mandatorySaving.name}</td>
-                                <td>{mandatorySaving.User.memberNumber}</td>
-                                <td>{mandatorySaving.depositeDate}</td>
-                                <td>{CurrencyFormatter(mandatorySaving.nominal)}</td>
-                                <td>
-                                    <i className="bi bi bi-pencil-square" onClick={() => handleShowFormUpdateMandatorySaving(mandatorySaving.id)}></i>
-                                    <i className="bi bi-trash" onClick={() => onDeleteMandatorySavingById(mandatorySaving.id)}></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    )}
-                </Table>
+                    </tbody>
+                )}
+            </Table>
 
-                {/* ----------------- Modal Form Create Mandatory Saving ----------------- */}
+            {/* ----------------- Modal Form Create Voluntary Saving ----------------- */}
 
-                <Modal show={showFormMandatorySaving} onHide={handleCloseFormMandatorySaving} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={showFormVoluntarySaving} onHide={handleCloseFormVoluntarySaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Form Mandatory Saving</Modal.Title>
+                        <Modal.Title>Form Product</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" readOnly value={user.name} autoComplete="off" />
+                                <Form.Control type="text" readOnly value={user.name} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Deposite Date</Form.Label>
-                                <Form.Control type="date" onChange={handleDateChange} autoComplete="off" />
+                                <Form.Control type="date" onChange={handleDateChange} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Nominal</Form.Label>
-                                <Form.Control type="number" placeholder="Example: 3000000" ref={nominalField} autoComplete="off" />
+                                <Form.Control type="number" placeholder="Example: 3000000" ref={nominalField} autoComplete="off"/>
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseFormMandatorySaving}>
+                        <Button variant="secondary" onClick={handleCloseFormVoluntarySaving}>
                             Close
                         </Button>
-                        <Button variant="success" onClick={onCreateTransactionMandatorySaving}>
+                        <Button variant="success" onClick={onCreateTransactionVoluntarySaving}>
                             Submit
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
-                {/* ----------------- End Modal Form Create Mandatory Saving ----------------- */}
+                {/* ----------------- End Modal Form Create Voluntary Saving ----------------- */}
 
 
-                {/* ----------------- Modal Form Update Mandatory Saving ----------------- */}
+                {/* ----------------- Modal Form Update Voluntary Saving ----------------- */}
 
-                <Modal show={showFormUpdateMandatorySaving} onHide={handleCloseFormUpdateMandatorySaving} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={showFormUpdateVoluntarySaving} onHide={handleCloseFormUpdateVoluntarySaving} aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Form Mandatory Saving</Modal.Title>
+                        <Modal.Title>Form Product</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" defaultValue={mandatorySavingById ? mandatorySavingById.name : null} autoComplete="off" />
+                                <Form.Control type="text" defaultValue={voluntarySavingById ? voluntarySavingById.name : null} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Deposite Date</Form.Label>
-                                <Form.Control type="date" onChange={handleDateChange} defaultValue={mandatorySavingById ? mandatorySavingById.depositeDate : null} autoComplete="off" />
+                                <Form.Control type="date" onChange={handleDateChange} defaultValue={voluntarySavingById ? voluntarySavingById.depositeDate : null} autoComplete="off"/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Nominal</Form.Label>
-                                <Form.Control type="number" defaultValue={mandatorySavingById ? mandatorySavingById.nominal : null} ref={nominalUpdateField} autoComplete="off" />
+                                <Form.Control type="number" defaultValue={voluntarySavingById ? voluntarySavingById.nominal : null} ref={nominalUpdateField} autoComplete="off"/>
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseFormUpdateMandatorySaving}>
+                        <Button variant="secondary" onClick={handleCloseFormUpdateVoluntarySaving}>
                             Close
                         </Button>
-                        <Button variant="success" onClick={onUpdateMandatorySaving}>
+                        <Button variant="success" onClick={onUpdateVoluntarySaving}>
                             Submit
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
-                {/* ----------------- End Modal Form Update Mandatory Saving ----------------- */}
+                {/* ----------------- End Modal Form Update Voluntary Saving ----------------- */}
 
 
             </Container>
@@ -485,4 +490,4 @@ const MandatorySaving = () => {
 
 };
 
-export default MandatorySaving;
+export default VoluntarySaving;

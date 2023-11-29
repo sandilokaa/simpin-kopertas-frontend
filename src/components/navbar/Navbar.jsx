@@ -11,7 +11,7 @@ import LogoSimpinKopertas from "../../assets/images/simpin-kopertas-logo.png";
 import ProfileUserImage from "../../assets/images/undraw_profile_2.svg";
 import StandLineNavbar from "../../assets/images/stand-line-navbar.png";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSnackbar } from 'notistack';
 
 import axios from "axios";
@@ -23,6 +23,7 @@ const NavbarGeneral = () => {
 
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
+    const userId = localStorage.getItem("userId");
 
     /* -------------------- End Global Variable -------------------- */
 
@@ -80,6 +81,8 @@ const NavbarGeneral = () => {
     const onLogout = () => {
 
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('id');
 
         navigate("/login");
 
@@ -95,7 +98,7 @@ const NavbarGeneral = () => {
         <Navbar className="navbar" expand="lg" fixed="top">
             <Container>
                 <Navbar.Brand href="#home">
-                    <Image src={LogoSimpinKopertas} className="logo-image"/>
+                    <Image src={LogoSimpinKopertas} className="logo-image" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -110,25 +113,25 @@ const NavbarGeneral = () => {
                             <NavDropdown.Item className="dropdown-item" href="/mandatory-saving">
                                 Simpanan Wajib
                             </NavDropdown.Item>
-                            <NavDropdown.Item className="dropdown-item">
+                            <NavDropdown.Item className="dropdown-item" href="/voluntary-saving">
                                 Simpanan Sukarela
                             </NavDropdown.Item>
                             <NavDropdown.Item className="dropdown-item">
                                 Pinjaman
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link className="nav-item"> <i className="bi bi-newspaper"></i> News </Nav.Link>
-                        <Nav.Link className="nav-item"> <i className="bi bi-telephone-inbound"></i> Contact Us </Nav.Link>
+                        <Nav.Link className="nav-item" href="/news"> <i className="bi bi-newspaper"></i> Berita </Nav.Link>
+                        <Nav.Link className="nav-item"> <i className="bi bi-telephone-inbound"></i> Hubungi Kami </Nav.Link>
                         <Image className="stand-line-navbar" src={StandLineNavbar} />
-                        <NavDropdown title={<span> <i className="bi bi-person"></i> Account</span>} id="basic-nav-dropdown" className="nav-profile">
+                        <NavDropdown title={<span> <i className="bi bi-person"></i> Pengaturan </span>} id="basic-nav-dropdown" className="nav-profile">
                             <NavDropdown.Item className="dropdown-item">
                                 <div className="profile-user">
                                     <Image className="profile-user-image" src={ProfileUserImage} />
                                     {user.name}
                                 </div>
                             </NavDropdown.Item>
-                            <NavDropdown.Item className="dropdown-item" href="/profile-user">
-                                View Profile
+                            <NavDropdown.Item className="dropdown-item" href={`/profile-user/${userId}`}>
+                                Lihat Profil
                             </NavDropdown.Item>
                             <NavDropdown.Item onClick={onLogout} className="dropdown-item">
                                 Logout

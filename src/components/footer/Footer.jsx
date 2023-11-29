@@ -11,9 +11,9 @@ const FooterGeneral = () => {
     return (
 
         <div>
-            <Container>
+            <Container className="simpin-footer">
                 <Row>
-                    <Col className="col-12 col-lg-12 text-center">
+                    <Col className="col-12 col-lg-12">
                         <p>
                             @2023 Simpin Kopertas. All Rights Reserved.
                         </p>

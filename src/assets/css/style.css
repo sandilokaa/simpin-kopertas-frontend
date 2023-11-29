@@ -148,10 +148,6 @@ body{
     position: relative;
 }
 
-.row-result-total{
-    margin: 0;
-}
-
 .row-result-total .card{
     height: 100%;
     width: 100%;
@@ -160,13 +156,13 @@ body{
 
 .row-result-total .card-title{
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .row-result-total .card-text{
     font-weight: 700;
     margin: 16% 0 0;
-    font-size: 22px;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -209,9 +205,25 @@ body{
 .card-analytics-diagram .card{
     height: 100%;
     width: 100%;
+    padding: 4% 0;
+}
+
+.card-analytics-diagram .card .card-title{
+    margin-top: -2%;
 }
 
 /* ---------- End Card Result Content  ---------- */
+
+
+/* ---------- Location Content  ---------- */
+
+.geo-map{
+    margin: 6% 0 0;
+    height: 90%;
+    width: 100%;
+}
+
+/* ---------- End Location Content  ---------- */
 
 
 /* ---------- Login Content  ---------- */
@@ -372,39 +384,70 @@ body{
     font-size: 32px;
 }
 
-#simpin-profile-user{
-    margin: 2% 0 0;
-    border: 1.5px solid #264653;
+#simpin-specific-profile-user{
+    margin: 4% 0 0;
+    border: 1.5px solid #D8D9DA;
+    border-radius: 10px;
+    align-items: center;
+    padding: 0 1%;
+}
+
+#simpin-specific-profile-user .specific{
+    margin: 2% 0;
+}
+
+#simpin-specific-profile-user .photo-profile-user{
+    width: 80px;
+    height: 80px;
     border-radius: 10px;
 }
 
-#simpin-profile-user .row{
-    padding: 1.5% 6%;
-    width: auto;
-}
-
-#simpin-profile-user .row .col{
-    margin: auto 0;
-}
-
-#simpin-profile-user .row .col i{
-    margin-right: 4%;
-}
-
-#simpin-profile-user .row .col:nth-child(2) p {
-    margin: 2% 0;
-}
-
-#simpin-profile-user .row .col:nth-child(3) p {
-    margin: 2% 0;
-}
-
-#simpin-profile-user .row .col:nth-child(4) .btn-edit-profile {
+#simpin-specific-profile-user .btn-edit-profile {
     padding: 4% 0;
     width: 50%;
     font-weight: 500;
     background-color: #264653;
     border: none;
+}
+
+#simpin-general-profile-user{
+    margin: 4% 0 0;
+    padding: 0 1%;
+    border: 1.5px solid #D8D9DA;
+    border-radius: 10px;
+    align-items: center;
+}
+
+#simpin-general-profile-user h1{
+    font-size: 20px;
+    margin: 2% 0;
+}
+
+#simpin-general-profile-user h6{
+    color: #9e9e9e;
+}
+
+#simpin-general-profile-user .btn-edit-profile {
+    padding: 4% 0;
+    width: 50%;
+    font-weight: 500;
+    background-color: #264653;
+    border: none;
+}
+
+.upload-button {
+    background-image: url('../images/camera.png');
+    background-repeat: no-repeat;
+    width: 96px;
+    height: 96px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.photo-profile{
+    width: 96px;
+    height: 96px;
+    border-radius: 10px;
 }
 
 /* ---------- End Profile User Content  ---------- */
@@ -415,17 +458,12 @@ body{
 .btn-add-principal-saving{
     background-color: #264653;
     border: none;
-    height: 74%;
+    height: 100%;
     font-weight: 500;
 }
 
 .btn-add-principal-saving:hover{
     background-color: #264653;
-}
-
-.btn-search{
-    background-color: #264653;
-    border: none;
 }
 
 .simpin-principal-saving-table {
@@ -460,6 +498,25 @@ body{
 
 /* ---------- Mandatory Saving Table Content  ---------- */
 
+.btn-search{
+    background-color: #264653;
+    border: none;
+}
+
+.btn-cancel{
+    background-color: #b34512;
+    border: none;
+}
+
+.btn-search:hover{
+    background-color: #264653;
+}
+
+.btn-cancel:hover{
+    background-color: #b34512;
+    border: none;
+}
+
 .btn-add-mandatory-saving{
     background-color: #264653;
     border: none;
@@ -469,11 +526,6 @@ body{
 
 .btn-add-mandatory-saving:hover{
     background-color: #264653;
-}
-
-.btn-search{
-    background-color: #264653;
-    border: none;
 }
 
 .simpin-mandatory-saving-table {
@@ -504,6 +556,163 @@ body{
 }
 
 /* ---------- End Mandatory Saving Table Content  ---------- */
+
+
+/* ---------- Voluntary Saving Table Content  ---------- */
+
+.btn-add-voluntary-saving{
+    background-color: #264653;
+    border: none;
+    height: 74%;
+    font-weight: 500;
+}
+
+.btn-add-voluntary-saving:hover{
+    background-color: #264653;
+}
+
+.simpin-voluntary-saving-table {
+    margin: 4% 0 6%;
+    text-align: center;
+    border: #01162F;
+}
+
+.simpin-voluntary-saving-table i{
+    margin: 0 4% 0;
+    font-size: 20px;
+}
+
+.simpin-voluntary-saving-table .bi-pencil-square{
+    padding: 1% 6%;
+    background-color: #0078FD;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.simpin-voluntary-saving-table .bi-trash{
+    padding: 1% 6%;
+    background-color: #b34512;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ---------- End Voluntary Saving Table Content  ---------- */
+
+
+/* ---------- Newspaper Content  ---------- */
+
+#simpin-newspapers-header{
+    margin: 10% 0 0;
+}
+
+#simpin-newspapers-header .newspapers-header{
+    display: flex;
+}
+
+#simpin-newspapers-header .newspapers-header i{
+    color: #264653;
+    font-size: 30px;
+    margin: 0 2% 0 0;
+}
+
+#simpin-newspapers-header .newspapers-header h4{
+    font-weight: 700;
+    display: block;
+    margin: auto 0;
+}
+
+#simpin-newspapers-header .newspapers-description span{
+    font-weight: 600;
+    margin: 0 8px;
+}
+
+#simpin-newspapers-card{
+    margin: 2% 0 0;
+}
+
+#simpin-newspapers-card .simpin-newspapers h1{
+    font-size: 20px;
+}
+
+#simpin-newspapers-card .simpin-newspapers hr{
+    width: 40%;
+    border: 1px solid #264653;
+}
+
+#simpin-newspapers-card .newspaper-collection{
+    height: 100%;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: 0.2s all ease-in-out;
+}
+
+#simpin-newspapers-card .newspaper-collection:hover{
+    cursor: pointer;
+    transform: translateY(-6px);
+}
+
+#simpin-newspapers-card .newspapers-image{
+    height: 100%;
+}
+
+#simpin-newspapers-card .news-name{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#simpin-newspapers-card .news-description{
+    font-size: 14px;
+    text-align: justify;
+}
+
+#simpin-newspapers-card .btn-youtube{
+    background: #264653;
+    width: 100%;
+    font-weight: 600;
+    transition: 0.2s all ease-in-out;
+    border: 1px solid #264653;
+}
+
+#simpin-newspapers-card .btn-youtube:hover{
+    background: transparent;
+    border: 1px solid #264653;
+    color: #264653;
+    font-weight: 600;
+}
+
+/* ---------- End Newspaper Content  ---------- */
+
+
+/* ---------- Report Content  ---------- */
+
+#print-report .btn-download-report{
+    width: 100%;
+    height: 40px;
+    background: #264653;
+    border-radius: 10px;
+    border: 1px solid #264653;
+}
+
+/* ---------- End Report Content  ---------- */
+
+
+/* ---------- Footer Content  ---------- */
+
+.simpin-footer{
+    position: relative;
+    min-height: 10vh;
+}
+
+.simpin-footer p{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* ---------- End Footer Content  ---------- */
 
 
 /* ---------- Responsive Design ---------- */
