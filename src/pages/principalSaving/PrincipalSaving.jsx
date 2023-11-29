@@ -314,7 +314,7 @@ const PrincipalSaving = () => {
 
                 <Row>
                     <Col className="col-12 col-lg-6 d-flex justify-content-start">
-                        <Button className="btn btn-add-principal-saving" onClick={handleShowFormPrincipalSaving}> Add Transaction </Button>
+                        <Button className="btn btn-add-principal-saving" onClick={handleShowFormPrincipalSaving}> Tambah Simpanan </Button>
                     </Col>
                 </Row>
 

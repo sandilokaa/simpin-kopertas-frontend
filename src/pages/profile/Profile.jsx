@@ -66,6 +66,55 @@ const Profile = () => {
 
     /* -------------------- End Current User -------------------- */
 
+
+    /* -------------------- Get Religion -------------------- */
+
+    const [religionData, setReligionData] = useState([]);
+
+    useEffect(() => {
+
+        const religionData = async () => {
+
+            const religionDataRequest = await axios.get(
+                `http://localhost:8080/api/v1/religion`
+            );
+
+            const getReligionResponse = await religionDataRequest.data.data.handleGetedAllReligionData;
+
+            setReligionData(getReligionResponse);
+        };
+
+        religionData();
+
+    }, []);
+
+    /* -------------------- End Get Religion -------------------- */
+
+
+    /* -------------------- Get Gender -------------------- */
+
+    const [genderData, setGenderData] = useState([]);
+
+    useEffect(() => {
+
+        const genderData = async () => {
+
+            const genderDataRequest = await axios.get(
+                `http://localhost:8080/api/v1/gender`
+            );
+
+            const getGenderResponse = await genderDataRequest.data.data.handleGetedAllGenderData;
+
+            setGenderData(getGenderResponse);
+        };
+
+        genderData();
+
+    }, []);
+
+    /* -------------------- End Get Gender -------------------- */
+
+
     /* -------------------- Get User Complete Profile Data -------------------- */
 
     const [completeProfileData, setCompleteProfileData] = useState([]);
@@ -124,15 +173,15 @@ const Profile = () => {
     const handleShowFormUpdateProfileSpecific = () => setShowFormUpdateProfileSpecific(true);
 
     const [image, setImage] = useState();
-	const [preview, setPreview] = useState();
-	const fileInputRef = useRef();
+    const [preview, setPreview] = useState();
+    const fileInputRef = useRef();
     const nameField = useRef();
     const emailField = useRef();
 
     const onUpdateSpecificProfile = async () => {
 
         try {
-            
+
             const token = localStorage.getItem("token");
 
             const updateSpecificProfilePayload = new FormData();
@@ -166,22 +215,22 @@ const Profile = () => {
         } catch (err) {
 
 
-            
+
         }
 
     };
 
     useEffect(() => {
-		if (image) {
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setPreview(reader.result);
-			}
-			reader.readAsDataURL(image);
-		} else {
-			setPreview(null);
-		}
-	}, [image]);
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            }
+            reader.readAsDataURL(image);
+        } else {
+            setPreview(null);
+        }
+    }, [image]);
 
     /* -------------------- End Update Profile Specific Data -------------------- */
 
@@ -189,14 +238,30 @@ const Profile = () => {
     /* -------------------- Update Profile General Data -------------------- */
 
     const [showFormUpdateProfileGeneral, setShowFormUpdateProfileGeneral] = useState(false);
+    const [selectedReligion, setSelectedReligion] = useState('');
+    const [selectedGender, setSelectedGender] = useState('');
 
     const handleCloseFormUpdateProfileGeneral = () => setShowFormUpdateProfileGeneral(false);
     const handleShowFormUpdateProfileGeneral = () => setShowFormUpdateProfileGeneral(true);
+    
+    const handleSelectReligionChange = (e) => {
+
+        const selectedReligionValue = e.target.value;
+
+        setSelectedReligion(selectedReligionValue);
+
+    };
+
+    const handleSelectGenderChange = (e) => {
+
+        const selectedGenderValue = e.target.value;
+
+        setSelectedGender(selectedGenderValue);
+
+    };
 
     const memberNumberField = useRef();
     const phoneNumberField = useRef();
-    const religionNameField = useRef();
-    const genderField = useRef();
     const jobField = useRef();
     const placeOfBirthField = useRef();
     const addressField = useRef();
@@ -210,8 +275,8 @@ const Profile = () => {
             const updateGeneralProfilePayload = {
                 memberNumber: memberNumberField.current.value,
                 phoneNumber: phoneNumberField.current.value,
-                religionName: religionNameField.current.value,
-                gender: genderField.current.value,
+                religionId: selectedReligion,
+                genderId: selectedGender,
                 job: jobField.current.value,
                 placeOfBirth: placeOfBirthField.current.value,
                 address: addressField.current.value
@@ -393,11 +458,21 @@ const Profile = () => {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Jenis Kelamin</Form.Label>
-                                <Form.Control type="text" defaultValue={completeProfileData.Gender && completeProfileData.Gender.gender} ref={genderField} autoComplete="off" />
+                                <Form.Select aria-label="Default select example" onChange={handleSelectGenderChange} value={selectedGender}>
+                                    <option>{completeProfileData.Gender && completeProfileData.Gender.gender}</option>
+                                    {genderData.map((data) =>
+                                        <option value={data.id} key={data.id}>{data.gender}</option>
+                                    )}
+                                </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Agama</Form.Label>
-                                <Form.Control type="text" defaultValue={completeProfileData.Religion && completeProfileData.Religion.religionName} ref={religionNameField} autoComplete="off" />
+                                <Form.Select aria-label="Default select example" onChange={handleSelectReligionChange} value={selectedReligion}>
+                                    <option>{completeProfileData.Religion && completeProfileData.Religion.religionName}</option>
+                                    {religionData.map((data) =>
+                                        <option value={data.id} key={data.id}>{data.religionName}</option>
+                                    )}
+                                </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Pekerjaan</Form.Label>

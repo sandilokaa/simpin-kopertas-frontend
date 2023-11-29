@@ -337,7 +337,7 @@ const MandatorySaving = () => {
 
                 <Row>
                     <Col className="col-12 col-lg-6 d-flex justify-content-start">
-                        <Button className="btn btn-add-mandatory-saving" onClick={handleShowFormMandatorySaving}> Add Transaction </Button>
+                        <Button className="btn btn-add-mandatory-saving" onClick={handleShowFormMandatorySaving}> Tambah Simpanan </Button>
                     </Col>
                     <Col className="col-12 col-lg-6 d-flex justify-content-end">
                         <InputGroup className="mb-3 simpin-search-group">

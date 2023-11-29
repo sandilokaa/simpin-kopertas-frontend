@@ -12,6 +12,7 @@ import MandatorySaving from "./pages/mandatorySaving/MandatorySaving";
 import VoluntarySaving from "./pages/voluntarySaving/VoluntarySaving";
 import News from "./pages/news/News";
 import Report from "./pages/report/Report";
+import Loan from "./pages/loan/Loan";
 import { SnackbarProvider } from 'notistack';
 
 const roots = document.getElementById('root');
@@ -31,6 +32,7 @@ root.render(
                 <Route path="/mandatory-saving" element={<MandatorySaving />}></Route>
                 <Route path="/voluntary-saving" element={<VoluntarySaving />}></Route>
                 <Route path="/news" element={<News />}></Route>
+                <Route path="/loan-data" element={<Loan />}></Route>
                 <Route path="/report-data" element={<Report />}></Route>
             </Routes>
         </SnackbarProvider>
