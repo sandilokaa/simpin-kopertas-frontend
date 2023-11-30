@@ -520,7 +520,7 @@ body{
 .btn-add-mandatory-saving{
     background-color: #264653;
     border: none;
-    height: 74%;
+    height: 100%;
     font-weight: 500;
 }
 
@@ -563,7 +563,7 @@ body{
 .btn-add-voluntary-saving{
     background-color: #264653;
     border: none;
-    height: 74%;
+    height: 100%;
     font-weight: 500;
 }
 
@@ -599,6 +599,49 @@ body{
 }
 
 /* ---------- End Voluntary Saving Table Content  ---------- */
+
+
+/* ---------- Loan Table Content  ---------- */
+
+.btn-add-loan{
+    background-color: #264653;
+    border: none;
+    height: 100%;
+    font-weight: 500;
+}
+
+.btn-add-loan:hover{
+    background-color: #264653;
+}
+
+.simpin-loan-table {
+    margin: 4% 0 6%;
+    text-align: center;
+    border: #01162F;
+}
+
+.simpin-loan-table i{
+    margin: 0 4% 0;
+    font-size: 20px;
+}
+
+.simpin-loan-table .bi-pencil-square{
+    padding: 1% 6%;
+    background-color: #0078FD;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.simpin-loan-table .bi-trash{
+    padding: 1% 6%;
+    background-color: #b34512;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ---------- End Mandatory Saving Table Content  ---------- */
 
 
 /* ---------- Newspaper Content  ---------- */

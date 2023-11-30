@@ -196,7 +196,7 @@ const MandatorySaving = () => {
 
         } catch (err) {
 
-            enqueueSnackbar('User telah input data (:', { variant: 'error', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
+            enqueueSnackbar('Cek ulang data anda (:', { variant: 'error', anchorOrigin: { vertical: 'top', horizontal: 'center' }, autoHideDuration: 2000 });
 
         }
 
@@ -340,9 +340,10 @@ const MandatorySaving = () => {
                         <Button className="btn btn-add-mandatory-saving" onClick={handleShowFormMandatorySaving}> Tambah Simpanan </Button>
                     </Col>
                     <Col className="col-12 col-lg-6 d-flex justify-content-end">
-                        <InputGroup className="mb-3 simpin-search-group">
+                        <InputGroup className="simpin-search-group">
                             <Form.Select aria-label="Default select example" value={selectedYear} onChange={handleYearChange}>
                                 <option>Tahun</option>
+                                <option value="2022">2024</option>
                                 <option value="2023">2023</option>
                                 <option value="2022">2022</option>
                                 <option value="2021">2021</option>
@@ -353,7 +354,6 @@ const MandatorySaving = () => {
                                 <option value="2016">2016</option>
                                 <option value="2015">2015</option>
                                 <option value="2014">2014</option>
-                                <option value="2013">2013</option>
                             </Form.Select>
                             <Form.Select aria-label="Default select example" value={selectedMonth} onChange={handleMonthChange}>
                                 <option>Bulan</option>
