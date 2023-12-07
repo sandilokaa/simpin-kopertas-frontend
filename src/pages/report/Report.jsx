@@ -186,6 +186,23 @@ const Report = () => {
 
             /* ------ End Set Table ------ */
 
+
+            /* ------ Set Signature ------ */
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Mengetahui,', 15, 200, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Ketua Koperasi', 15, 210, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Annisa Nurika Amalia', 15, 240, { align: 'left' });
+
+            /* ------ End Set Signature ------ */
+
             /* ------ Unduh dokumen PDF ------ */
 
             doc.save('mandatory-report-note.pdf', { autoDownload: false });
@@ -309,6 +326,22 @@ const Report = () => {
 
             /* ------ End Set Table ------ */
 
+            /* ------ Set Signature ------ */
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Mengetahui,', 15, 200, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Ketua Koperasi', 15, 210, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Annisa Nurika Amalia', 15, 240, { align: 'left' });
+
+            /* ------ End Set Signature ------ */
+
             /* ------ Unduh dokumen PDF ------ */
 
             doc.save('voluntary-report-note.pdf', { autoDownload: false });
@@ -418,6 +451,22 @@ const Report = () => {
 
             /* ------ End Set Table ------ */
 
+            /* ------ Set Signature ------ */
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Mengetahui,', 15, 200, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Ketua Koperasi', 15, 210, { align: 'left' });
+
+            doc.setFont('Times-Roman');
+            doc.setFontSize(14);
+            doc.text('Annisa Nurika Amalia', 15, 240, { align: 'left' });
+
+            /* ------ End Set Signature ------ */
+
             /* ------ Unduh dokumen PDF ------ */
 
             doc.save('loan-report-note.pdf', { autoDownload: false });
@@ -445,8 +494,8 @@ const Report = () => {
                                     <InputGroup className="mb-3 simpin-search-group">
                                         <Form.Select aria-label="Default select example" value={selectedYearMandatory} onChange={handleYearMandatoryChange}>
                                             <option>Tahun</option>
-                                            <option value="2023">2024</option>
-                                            <option value="2022">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2023">2023</option>
                                             <option value="2022">2022</option>
                                             <option value="2021">2021</option>
                                             <option value="2020">2020</option>
